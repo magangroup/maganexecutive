@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Magan Executive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #000;
+    color: white;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 50px;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+}
+
+.logo img {
+    height: 55px;
+    width: auto;
+}
+
+.menu a {
+    color: white;
+    margin-left: 25px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.menu a:hover {
+    color: #f5c542;
+}
+
+.btn-nav {
+    background: linear-gradient(45deg,#f5c542,#ffd95a);
+    color: black !important;
+    padding: 8px 18px;
+    border-radius: 20px;
+}
+
+/* SELECTOR DE IDIOMA (único agregado) */
+.lang-selector {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 25px;
+    font-size: 14px;
+}
+
+.lang-selector button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 2px 4px;
+}
+
+.lang-selector button:hover {
+    color: #f5c542;
+}
+
+.lang-selector button.activo {
+    color: #f5c542;
+    font-weight: bold;
+}
+
+.lang-selector span {
+    color: #888;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),
+    url("imagenes/Magan1.jpg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+}
+
+.contenido {
+    max-width: 500px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h1 span {
+    color: #f5c542;
+}
+
+p {
+    color: #ccc;
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+.boton {
+    margin-top: 25px;
+    display: inline-block;
+    background: linear-gradient(45deg,#f5c542,#ffd95a);
+    color: black;
+    padding: 14px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+}
+
+/* VEHÍCULOS */
+.vehiculos {
+    padding: 80px 60px;
+    text-align: center;
+}
+
+.vehiculos h2 {
+    font-size: 42px;
+    margin-bottom: 40px;
+}
+
+.vehiculos span {
+    color: #f5c542;
+}
+
+.vehiculo-box {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* SLIDER */
+.slider {
+    width: 55%;
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+}
+
+.slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.slider img.activo {
+    opacity: 1;
+    z-index: 1;
+}
+
+.vehiculo-texto {
+    text-align: left;
+}
+
+.vehiculo-texto h3 {
+    font-size: 28px;
+    color: #f5c542;
+    margin-bottom: 15px;
+}
+
+.vehiculo-texto p {
+    font-size: 16px;
+    color: #ccc;
+}
+
+/* TESTIMONIOS */
+.testimonios {
+    padding: 100px 60px;
+    background: #0a0a0a;
+    text-align: center;
+}
+
+.testimonios h2 {
+    font-size: 38px;
+    margin-bottom: 60px;
+}
+
+.testimonios span {
+    color: #f5c542;
+}
+
+.testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 30px;
+}
+
+.testimonio {
+    position: relative;
+    background: #111;
+    padding: 35px;
+    border-radius: 15px;
+    text-align: left;
+    transition: 0.3s;
+    min-height: 160px;
+}
+
+.testimonio:hover {
+    transform: translateY(-5px);
+    background: #181818;
+}
+
+.verificado {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(45deg,#f5c542,#ffd95a);
+    color: black;
+    font-size: 12px;
+    padding: 5px 8px;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+/* SERVICIOS */
+.servicios {
+    padding: 100px 60px;
+    text-align: center;
+}
+
+.servicios h2 {
+    font-size: 38px;
+    margin-bottom: 60px;
+}
+
+.servicios span {
+    color: #f5c542;
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 30px;
+}
+
+.servicio {
+    background: #111;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.servicio.gris { background:#1a1a1a; }
+.servicio.gris-oscuro { background:#141414; }
+
+.servicio.amarillo {
+    background: linear-gradient(45deg,#f5c542,#ffd95a);
+    color: black;
+}
+
+.servicio.amarillo h3,
+.servicio.amarillo p {
+    color: black;
+}
+
+.servicio p.descripcion {
+    font-size: 14px;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+/* EMPRESA */
+.empresa {
+    padding: 100px 60px;
+    background: #0a0a0a;
+    text-align: center;
+}
+
+.empresa h2 {
+    font-size: 38px;
+    margin-bottom: 60px;
+}
+
+.empresa span {
+    color: #f5c542;
+}
+
+.empresa-contenido {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.bloque {
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.bloque.dark { background:#111; }
+
+.bloque.yellow {
+    background: linear-gradient(45deg,#f5c542,#ffd95a);
+    color: black;
+}
+
+.bloque.yellow h3,
+.bloque.yellow li {
+    color: black;
+}
+
+/* 🔥 SOLO MÓVIL (NO AFECTA ESCRITORIO) */
+@media (max-width:768px){
+
+.navbar{
+    padding:10px 20px;
+}
+
+.menu{
+    display:none;
+}
+
+.hero{
+    height:auto;
+    padding:120px 20px 60px;
+    text-align:center;
+}
+
+h1{
+    font-size:32px;
+}
+
+p{
+    font-size:16px;
+}
+
+.vehiculos{
+    padding:60px 20px;
+}
+
+.vehiculo-box{
+    flex-direction:column;
+}
+
+.slider{
+    width:100%;
+    height:220px;
+}
+
+.testimonios{
+    padding:60px 20px;
+}
+
+.testimonios-grid{
+    grid-template-columns:1fr;
+}
+
+.servicios{
+    padding:60px 20px;
+}
+
+.servicios-grid{
+    grid-template-columns:1fr;
+}
+
+.empresa{
+    padding:60px 20px;
+}
+
+.empresa-contenido{
+    grid-template-columns:1fr;
+}
+
+}
+
+.hamburger{display:none;font-size:30px;color:#fff;cursor:pointer}
+@media (max-width:768px){
+.hamburger{display:block}
+.menu{display:none;position:absolute;top:70px;left:0;width:100%;background:#000;padding:15px 0}
+.menu.activo{display:flex;flex-direction:column}
+.menu a{margin:10px 20px}
+}
+
+
+    .destinos-fl { background:#0d0d0d; padding:60px 20px; text-align:center; }
+    .destinos-fl h2 { font-size:36px; margin-bottom:10px; }
+    .destinos-fl h2 span { color:#f5c542; }
+    .destinos-fl p { color:#ccc; }
+    .destino-chips { max-width:1100px; margin:28px auto 0; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+    .chip { border:1px solid #f5c542; color:#fff; padding:8px 16px; border-radius:999px; font-size:15px; }
+    .destinos-fl .extra { margin-top:26px; color:#f5c542; font-weight:bold; }
+    @media (max-width:768px){ .destinos-fl h2 { font-size:28px; } }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <a class='logo' href='/'>
+        <img src="imagenes/logomagan.png">
+    </a>
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <nav class="menu">
+        <a href='/' data-i18n="nav_inicio">Inicio</a>
+        <a href='/vehiculos' data-i18n="nav_vehiculos">Vehículos</a>
+        <a href='/destinos' data-i18n="nav_destinos">Destinos</a>
+        <a href='/experiencia' data-i18n="nav_experiencia">Experiencia</a>
+        <a class='btn-nav' href='/cotizar' data-i18n="nav_cotizar">Cotizar</a>
+    </nav>
+
+    <div class="lang-selector">
+        <button type="button" id="btn-es" onclick="setLang('es')">ES</button>
+        <span>|</span>
+        <button type="button" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="contenido">
+        <h1 data-i18n="hero_titulo">Viaja como <br><span>un VIP</span></h1>
+        <p data-i18n="hero_texto">Transporte ejecutivo de lujo en Miami con puntualidad, confort y seguridad.</p>
+        <a class='boton' href='/cotizar' data-i18n="hero_boton">Solicitar cotización</a>
+    </div>
+</section>
+
+<section class="vehiculos">
+    <h2 data-i18n="flota_titulo">Nuestra <span>Flota de Vehículos</span></h2>
+
+    <div class="vehiculo-box">
+
+        <div class="slider">
+            <img src="imagenes/suburban-1.jpg" class="slide activo">
+            <img src="imagenes/suburban-2.jpg" class="slide">
+            <img src="imagenes/suburban-3.jpg" class="slide">
+            <img src="imagenes/suburban-4.jpg" class="slide">
+            <img src="imagenes/suburban-5.jpg" class="slide">
+            <img src="imagenes/suburban-6.jpg" class="slide">
+            <img src="imagenes/suburban-7.jpg" class="slide">
+            <img src="imagenes/suburban-8.jpg" class="slide">
+            <img src="imagenes/suburban-9.jpg" class="slide">
+        </div>
+
+        <div class="vehiculo-texto">
+            <h3 data-i18n="flota_subtitulo">Lujo que se siente en cada trayecto</h3>
+            <p data-i18n="flota_texto">
+                Nuestra flota SUV combina elegancia, espacio y confort. 
+                Vehículos modernos, impecables y diseñados para ofrecer una experiencia VIP desde que subes hasta tu destino.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="testimonios">
+    <h2 data-i18n="testimonios_titulo">Lo que dicen <span>nuestros clientes</span></h2>
+    <div class="testimonios-grid">
+        <div class="testimonio"><div class="verificado">✔</div><p data-i18n="test1_texto">"Excelente servicio, puntualidad total."</p><h4 data-i18n="test1_autor">Cliente VIP</h4></div>
+        <div class="testimonio"><div class="verificado">✔</div><p data-i18n="test2_texto">"Vehículos impecables y atención premium."</p><h4 data-i18n="test2_autor">Corporativo</h4></div>
+        <div class="testimonio"><div class="verificado">✔</div><p data-i18n="test3_texto">"Siempre mi opción número uno."</p><h4 data-i18n="test3_autor">Frecuente</h4></div>
+        <div class="testimonio"><div class="verificado">✔</div><p data-i18n="test4_texto">"Servicio 24/7 real."</p><h4 data-i18n="test4_autor">Empresarial</h4></div>
+        <div class="testimonio"><div class="verificado">✔</div><p data-i18n="test5_texto">"Chofer profesional y puntual."</p><h4 data-i18n="test5_autor">Ejecutivo</h4></div>
+        <div class="testimonio"><div class="verificado">✔</div><p data-i18n="test6_texto">"Experiencia VIP total."</p><h4 data-i18n="test6_autor">Turista</h4></div>
+    </div>
+</section>
+
+<section class="servicios">
+    <h2 data-i18n="servicios_titulo">Servicios <span>Premium</span></h2>
+
+    <div class="servicios-grid">
+
+        <div class="servicio gris">
+            <h3 data-i18n="serv1_titulo">✈️ Aeropuertos y Puerto</h3>
+            <p data-i18n="serv1_frase">Miami · Fort Lauderdale · West Palm Beach · PortMiami.</p>
+            <p class="descripcion" data-i18n="serv1_desc">Servicio especializado desde y hacia los aeropuertos de Miami (MIA), Fort Lauderdale (FLL) y West Palm Beach (PBI), y el puerto de cruceros PortMiami, con monitoreo de vuelos, recepción personalizada y puntualidad garantizada.</p>
+        </div>
+
+        <div class="servicio gris">
+            <h3 data-i18n="serv2_titulo">💼 Corporativo</h3>
+            <p data-i18n="serv2_frase">Transporte ejecutivo.</p>
+            <p class="descripcion" data-i18n="serv2_desc">
+                Servicio confiable, discreto y puntual para ejecutivos y empresas.
+            </p>
+        </div>
+
+        <div class="servicio gris-oscuro">
+            <h3 data-i18n="serv3_titulo">🎉 Eventos</h3>
+            <p data-i18n="serv3_frase">Llega con estilo.</p>
+            <p class="descripcion" data-i18n="serv3_desc">
+                Ideal para bodas y celebraciones con elegancia y confort.
+            </p>
+        </div>
+
+        <div class="servicio amarillo">
+            <h3 data-i18n="serv4_titulo">🔒 Privado</h3>
+            <p data-i18n="serv4_frase">Servicio discreto.</p>
+            <p class="descripcion" data-i18n="serv4_desc">
+                Máxima privacidad, seguridad y atención personalizada.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="destinos-fl">
+    <h2 data-i18n="destinos_titulo">Destinos en <span>Florida</span></h2>
+    <p data-i18n="destinos_texto">Aeropuertos, puertos, hoteles, eventos y traslados privados en todo el estado.</p>
+    <div class="destino-chips">
+            <span class="chip">Miami</span>
+            <span class="chip">Miami Beach</span>
+            <span class="chip">South Beach</span>
+            <span class="chip">Brickell</span>
+            <span class="chip">Coral Gables</span>
+            <span class="chip">Coconut Grove</span>
+            <span class="chip">Wynwood</span>
+            <span class="chip">Doral</span>
+            <span class="chip">Aventura</span>
+            <span class="chip">Sunny Isles Beach</span>
+            <span class="chip">Bal Harbour</span>
+            <span class="chip">Hollywood</span>
+            <span class="chip">Fort Lauderdale</span>
+            <span class="chip">Weston</span>
+            <span class="chip">Boca Raton</span>
+            <span class="chip">Delray Beach</span>
+            <span class="chip">West Palm Beach</span>
+            <span class="chip">Palm Beach</span>
+            <span class="chip">Naples</span>
+            <span class="chip">Marco Island</span>
+            <span class="chip">Fort Myers</span>
+            <span class="chip">Sarasota</span>
+            <span class="chip">Tampa</span>
+            <span class="chip">St. Petersburg</span>
+            <span class="chip">Clearwater</span>
+            <span class="chip">Orlando</span>
+            <span class="chip">Daytona Beach</span>
+            <span class="chip">Jacksonville</span>
+            <span class="chip">Key Largo</span>
+            <span class="chip">Islamorada</span>
+            <span class="chip">Key West</span>
+            <span class="chip">PortMiami</span>
+            <span class="chip">Port Everglades</span>
+            <span class="chip">MIA — Miami Intl.</span>
+            <span class="chip">FLL — Fort Lauderdale</span>
+            <span class="chip">PBI — Palm Beach Intl.</span>
+            <span class="chip">Downtown Miami</span>
+            <span class="chip">Design District</span>
+            <span class="chip">Surfside</span>
+            <span class="chip">Key Biscayne</span>
+            <span class="chip">Hialeah</span>
+            <span class="chip">Miami Lakes</span>
+            <span class="chip">Kendall</span>
+            <span class="chip">Pinecrest</span>
+            <span class="chip">Homestead</span>
+            <span class="chip">Hallandale Beach</span>
+            <span class="chip">Pembroke Pines</span>
+            <span class="chip">Miramar</span>
+            <span class="chip">Plantation</span>
+            <span class="chip">Davie</span>
+            <span class="chip">Coral Springs</span>
+            <span class="chip">Pompano Beach</span>
+            <span class="chip">Deerfield Beach</span>
+            <span class="chip">Boynton Beach</span>
+            <span class="chip">Wellington</span>
+            <span class="chip">Jupiter</span>
+            <span class="chip">Palm Beach Gardens</span>
+            <span class="chip">Marathon</span>
+            <span class="chip">Sanibel</span>
+            <span class="chip">Cape Coral</span>
+            <span class="chip">Bonita Springs</span>
+            <span class="chip">Siesta Key</span>
+            <span class="chip">Venice</span>
+            <span class="chip">Clearwater Beach</span>
+            <span class="chip">Kissimmee</span>
+            <span class="chip">Lake Buena Vista · Disney</span>
+            <span class="chip">Winter Park</span>
+            <span class="chip">Cocoa Beach</span>
+            <span class="chip">Port Canaveral</span>
+            <span class="chip">Melbourne</span>
+            <span class="chip">Vero Beach</span>
+            <span class="chip">Stuart</span>
+            <span class="chip">Port St. Lucie</span>
+            <span class="chip">St. Augustine</span>
+            <span class="chip">Ponte Vedra Beach</span>
+            <span class="chip">Amelia Island</span>
+            <span class="chip">Pensacola</span>
+            <span class="chip">Destin</span>
+            <span class="chip">Panama City Beach</span>
+            <span class="chip">Tallahassee</span>
+            <span class="chip">Gainesville</span>
+            <span class="chip">Ocala</span>
+            <span class="chip">MCO — Orlando Intl.</span>
+            <span class="chip">TPA — Tampa Intl.</span>
+            <span class="chip">RSW — Fort Myers</span>
+            <span class="chip">JAX — Jacksonville</span>
+            <span class="chip">Port Tampa Bay</span>
+    </div>
+    <p class="extra" data-i18n="destinos_extra">¿No ve su destino? Lo llevamos a cualquier parte de Florida — pregúntenos.</p>
+</section>
+
+<section class="empresa">
+    <h2>Magan <span>Luxury Service</span></h2>
+
+    <div class="empresa-contenido">
+
+        <div class="bloque dark">
+            <h3 data-i18n="empresa_exp_titulo">Experiencia Premium</h3>
+            <ul>
+                <li>✔ Best Service In Town</li>
+                <li>✔ 24/7 Service</li>
+                <li>✔ Willing to Ride Anywhere</li>
+                <li>✔ On-Board Wi-Fi</li>
+                <li>✔ Tablets Available</li>
+            </ul>
+        </div>
+
+        <div class="bloque yellow">
+            <h3 data-i18n="empresa_info_titulo">Información</h3>
+            <ul>
+                <li data-i18n="empresa_info_horario"><strong>🟢 Abierto 24 horas</strong></li>
+                <li data-i18n="empresa_info_servicio">🚘 Transporte, limusinas y taxi</li>
+                <li>📧 magangroupllc@gmail.com</li>
+                <li data-i18n="empresa_info_tel1"><strong>📞 Jorge: <a href="tel:+17865200651" style="color:inherit;">786-520-0651</a></strong></li>
+                <li data-i18n="empresa_info_tel2"><strong>📞 Sergio: <a href="tel:+17865089815" style="color:inherit;">786-508-9815</a></strong> (llamadas en inglés)</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<script>
+let slides = document.querySelectorAll('.slide');
+let index = 0;
+
+setInterval(() => {
+    slides[index].classList.remove('activo');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('activo');
+}, 3000);
+
+function toggleMenu(){
+document.querySelector('.menu').classList.toggle('activo');
+}
+
+</script>
+
+<script>
+/* ===== SELECTOR DE IDIOMA ES/EN (único agregado a la página) ===== */
+const i18n = {
+    es: {
+        destinos_titulo: 'Destinos en <span>Florida</span>',
+        destinos_texto: 'Aeropuertos, puertos, hoteles, eventos y traslados privados en todo el estado.',
+        destinos_extra: '¿No ve su destino? Lo llevamos a cualquier parte de Florida — pregúntenos.',
+        nav_inicio: 'Inicio',
+        nav_vehiculos: 'Vehículos',
+        nav_destinos: 'Destinos',
+        nav_experiencia: 'Experiencia',
+        nav_cotizar: 'Cotizar',
+        hero_titulo: 'Viaja como <br><span>un VIP</span>',
+        hero_texto: 'Transporte ejecutivo de lujo en Miami con puntualidad, confort y seguridad.',
+        hero_boton: 'Solicitar cotización',
+        flota_titulo: 'Nuestra <span>Flota de Vehículos</span>',
+        flota_subtitulo: 'Lujo que se siente en cada trayecto',
+        flota_texto: 'Nuestra flota SUV combina elegancia, espacio y confort. Vehículos modernos, impecables y diseñados para ofrecer una experiencia VIP desde que subes hasta tu destino.',
+        testimonios_titulo: 'Lo que dicen <span>nuestros clientes</span>',
+        test1_texto: '"Excelente servicio, puntualidad total."',
+        test1_autor: 'Cliente VIP',
+        test2_texto: '"Vehículos impecables y atención premium."',
+        test2_autor: 'Corporativo',
+        test3_texto: '"Siempre mi opción número uno."',
+        test3_autor: 'Frecuente',
+        test4_texto: '"Servicio 24/7 real."',
+        test4_autor: 'Empresarial',
+        test5_texto: '"Chofer profesional y puntual."',
+        test5_autor: 'Ejecutivo',
+        test6_texto: '"Experiencia VIP total."',
+        test6_autor: 'Turista',
+        servicios_titulo: 'Servicios <span>Premium</span>',
+        serv1_titulo: '✈️ Aeropuertos y Puerto',
+        serv1_frase: 'Miami · Fort Lauderdale · West Palm Beach · PortMiami.',
+        serv1_desc: 'Servicio especializado desde y hacia los aeropuertos de Miami (MIA), Fort Lauderdale (FLL) y West Palm Beach (PBI), y el puerto de cruceros PortMiami, con monitoreo de vuelos, recepción personalizada y puntualidad garantizada.',
+        serv2_titulo: '💼 Corporativo',
+        serv2_frase: 'Transporte ejecutivo.',
+        serv2_desc: 'Servicio confiable, discreto y puntual para ejecutivos y empresas.',
+        serv3_titulo: '🎉 Eventos',
+        serv3_frase: 'Llega con estilo.',
+        serv3_desc: 'Ideal para bodas y celebraciones con elegancia y confort.',
+        serv4_titulo: '🔒 Privado',
+        serv4_frase: 'Servicio discreto.',
+        serv4_desc: 'Máxima privacidad, seguridad y atención personalizada.',
+        empresa_exp_titulo: 'Experiencia Premium',
+        empresa_info_titulo: 'Información',
+        empresa_info_horario: '<strong>🟢 Abierto 24 horas</strong>',
+        empresa_info_servicio: '🚘 Transporte, limusinas y taxi',
+        empresa_info_tel1: '<strong>📞 Jorge: <a href="tel:+17865200651" style="color:inherit;">786-520-0651</a></strong>',
+        empresa_info_tel2: '<strong>📞 Sergio: <a href="tel:+17865089815" style="color:inherit;">786-508-9815</a></strong> (llamadas en inglés)'
+    },
+    en: {
+        destinos_titulo: 'Destinations in <span>Florida</span>',
+        destinos_texto: 'Airports, seaports, hotels, events and private transfers across the whole state.',
+        destinos_extra: 'Don\'t see your destination? We will take you anywhere in Florida — just ask.',
+        nav_inicio: 'Home',
+        nav_vehiculos: 'Vehicles',
+        nav_destinos: 'Destinations',
+        nav_experiencia: 'Experience',
+        nav_cotizar: 'Get a Quote',
+        hero_titulo: 'Travel like <br><span>a VIP</span>',
+        hero_texto: 'Luxury executive transportation in Miami with punctuality, comfort and safety.',
+        hero_boton: 'Request a quote',
+        flota_titulo: 'Our <span>Vehicle Fleet</span>',
+        flota_subtitulo: 'Luxury you can feel on every ride',
+        flota_texto: 'Our SUV fleet combines elegance, space and comfort. Modern, impeccable vehicles designed to offer a VIP experience from the moment you get in until you reach your destination.',
+        testimonios_titulo: 'What <span>our clients</span> say',
+        test1_texto: '"Excellent service, total punctuality."',
+        test1_autor: 'VIP Client',
+        test2_texto: '"Impeccable vehicles and premium service."',
+        test2_autor: 'Corporate',
+        test3_texto: '"Always my number one choice."',
+        test3_autor: 'Frequent',
+        test4_texto: '"Real 24/7 service."',
+        test4_autor: 'Business',
+        test5_texto: '"Professional, punctual chauffeur."',
+        test5_autor: 'Executive',
+        test6_texto: '"Total VIP experience."',
+        test6_autor: 'Tourist',
+        servicios_titulo: 'Premium <span>Services</span>',
+        serv1_titulo: '✈️ Airports & Seaport',
+        serv1_frase: 'Miami · Fort Lauderdale · West Palm Beach · PortMiami.',
+        serv1_desc: 'Specialized service to and from Miami (MIA), Fort Lauderdale (FLL) and West Palm Beach (PBI) airports, and the PortMiami cruise port, with flight monitoring, personalized reception and guaranteed punctuality.',
+        serv2_titulo: '💼 Corporate',
+        serv2_frase: 'Executive transportation.',
+        serv2_desc: 'Reliable, discreet and punctual service for executives and companies.',
+        serv3_titulo: '🎉 Events',
+        serv3_frase: 'Arrive in style.',
+        serv3_desc: 'Ideal for weddings and celebrations with elegance and comfort.',
+        serv4_titulo: '🔒 Private',
+        serv4_frase: 'Discreet service.',
+        serv4_desc: 'Maximum privacy, safety and personalized attention.',
+        empresa_exp_titulo: 'Premium Experience',
+        empresa_info_titulo: 'Information',
+        empresa_info_horario: '<strong>🟢 Open 24 hours</strong>',
+        empresa_info_servicio: '🚘 Transportation, limousines and taxi',
+        empresa_info_tel1: '<strong>📞 Jorge: <a href="tel:+17865200651" style="color:inherit;">786-520-0651</a></strong>',
+        empresa_info_tel2: '<strong>📞 Sergio: <a href="tel:+17865089815" style="color:inherit;">786-508-9815</a></strong> (English calls)'
+    }
+};
+
+function setLang(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang] && i18n[lang][key]) {
+            el.innerHTML = i18n[lang][key];
+        }
+    });
+    document.documentElement.lang = lang;
+    document.getElementById('btn-es').classList.toggle('activo', lang === 'es');
+    document.getElementById('btn-en').classList.toggle('activo', lang === 'en');
+    try { localStorage.setItem('magan-lang', lang); } catch (e) {}
+}
+
+(function () {
+    let saved = 'es';
+    try { saved = localStorage.getItem('magan-lang') || 'es'; } catch (e) {}
+    setLang(saved === 'en' ? 'en' : 'es');
+})();
+</script>
+
+</body>
+</html>
