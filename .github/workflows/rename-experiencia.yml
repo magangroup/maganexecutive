@@ -1,0 +1,25 @@
+name: Renombrar experiencia a index
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/rename-experiencia.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Renombrar archivo
+        run: |
+          if [ -f experiencia/experiencia-miami.html ]; then
+            mv experiencia/experiencia-miami.html experiencia/index.html
+            git config user.name "magangroup"
+            git config user.email "magangroupllc@gmail.com"
+            git add experiencia/index.html experiencia/experiencia-miami.html
+            git commit -m "Reemplazar experiencia/index.html con version final" || echo "Sin cambios"
+            git push
+          else
+            echo "Archivo ya renombrado"
+          fi
