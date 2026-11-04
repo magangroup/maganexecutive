@@ -1,0 +1,24 @@
+name: Temp mover experiencia a index
+on:
+  push:
+    paths:
+      - '.github/workflows/temp-mover-experiencia.yml'
+  workflow_dispatch:
+jobs:
+  mover:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mover experiencia-miami.html a index.html
+        run: |
+          cp experiencia/experiencia-miami.html experiencia/index.html
+          rm experiencia/experiencia-miami.html
+      - name: Confirmar cambio
+        run: |
+          git config user.name "magangroup"
+          git config user.email "magangroup@users.noreply.github.com"
+          git add experiencia/index.html experiencia/experiencia-miami.html
+          git commit -m "Reemplazar experiencia/index.html con version definitiva sin updateContactLinks" || echo "sin cambios"
+          git push
