@@ -402,6 +402,29 @@ p{
     .chip { border:1px solid #f5c542; color:#fff; padding:8px 16px; border-radius:999px; font-size:15px; }
     .destinos-fl .extra { margin-top:26px; color:#f5c542; font-weight:bold; }
     @media (max-width:768px){ .destinos-fl h2 { font-size:28px; } }
+
+/* ===== PROFESSIONAL POLISH (Fede, 2026-11-04) ===== */
+.vehiculos h2, .testimonios h2, .servicios h2, .empresa h2 { letter-spacing:.6px; }
+.servicios-grid { align-items:stretch; }
+.servicio { border:1px solid #262626; border-top:3px solid #f5c542; box-shadow:0 12px 30px rgba(0,0,0,.45); text-align:left; transition:transform .25s ease, background .25s ease; }
+.servicio:hover { transform:translateY(-5px); }
+.servicio h3 { font-size:20px; letter-spacing:.3px; margin-bottom:6px; }
+.servicio p { font-size:15.5px; }
+.servicio p.descripcion { color:#c9c9c9; font-size:14.5px; line-height:1.6; }
+.servicio.amarillo p.descripcion { color:#222; }
+.testimonio { border:1px solid #262626; }
+.empresa .bloque { border:1px solid #262626; box-shadow:0 12px 30px rgba(0,0,0,.4); }
+.empresa .bloque h3 { font-size:21px; margin-bottom:14px; letter-spacing:.3px; }
+.empresa .bloque ul { list-style:none; }
+.empresa .bloque li { margin:9px 0; font-size:15.5px; }
+.footer { background:#050505; border-top:1px solid #222; padding:46px 60px 28px; color:#bbb; text-align:left; }
+.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:34px; max-width:1100px; margin:0 auto; }
+.footer h4 { color:#f5c542; margin-bottom:12px; font-size:16px; }
+.footer a { color:#bbb; text-decoration:none; display:block; margin:6px 0; font-size:14px; }
+.footer a:hover { color:#f5c542; }
+.footer p { font-size:14px; line-height:1.6; color:#bbb; margin:0; }
+.copy { text-align:center; color:#777; font-size:13px; margin-top:30px; }
+@media (max-width:768px){ .footer{ padding:40px 20px 24px; } .footer-grid{ grid-template-columns:1fr; } .servicio{ text-align:left; } }
 </style>
 </head>
 
@@ -640,6 +663,31 @@ p{
     </div>
 </section>
 
+
+<footer class="footer">
+    <div class="footer-grid">
+        <div>
+            <h4>MAGAN EXECUTIVE</h4>
+            <p data-i18n="footer_desc">Transporte ejecutivo de lujo en Miami y todo Florida. Servicio 24/7.</p>
+        </div>
+        <div>
+            <h4 data-i18n="footer_nav">Enlaces</h4>
+            <a href='/' data-i18n="nav_inicio">Inicio</a>
+            <a href='/vehiculos' data-i18n="nav_vehiculos">Vehículos</a>
+            <a href='/destinos' data-i18n="nav_destinos">Destinos</a>
+            <a href='/experiencia' data-i18n="nav_experiencia">Experiencia</a>
+            <a href='/cotizar' data-i18n="nav_cotizar">Cotizar</a>
+        </div>
+        <div>
+            <h4 data-i18n="footer_contacto">Contacto</h4>
+            <a href="tel:+17865200651">📞 Jorge: 786-520-0651</a>
+            <a href="tel:+17865089815">📞 Sergio: 786-508-9815</a>
+            <a href="mailto:magangroupllc@gmail.com">📧 magangroupllc@gmail.com</a>
+        </div>
+    </div>
+    <div class="copy" data-i18n="footer_copy">© 2026 MAGAN GROUP LLC — Todos los derechos reservados.</div>
+</footer>
+
 <script>
 let slides = document.querySelectorAll('.slide');
 let index = 0;
@@ -705,7 +753,11 @@ const i18n = {
         empresa_info_horario: '<strong>🟢 Abierto 24 horas</strong>',
         empresa_info_servicio: '🚘 Transporte, limusinas y taxi',
         empresa_info_tel1: '<strong>📞 Jorge: <a href="tel:+17865200651" style="color:inherit;">786-520-0651</a></strong>',
-        empresa_info_tel2: '<strong>📞 Sergio: <a href="tel:+17865089815" style="color:inherit;">786-508-9815</a></strong> (llamadas en inglés)'
+        empresa_info_tel2: '<strong>📞 Sergio: <a href="tel:+17865089815" style="color:inherit;">786-508-9815</a></strong> (llamadas en inglés)',
+        footer_desc: 'Transporte ejecutivo de lujo en Miami y todo Florida. Servicio 24/7.',
+        footer_nav: 'Enlaces',
+        footer_contacto: 'Contacto',
+        footer_copy: '© 2026 MAGAN GROUP LLC — Todos los derechos reservados.'
     },
     en: {
         destinos_titulo: 'Destinations in <span>Florida</span>',
@@ -753,7 +805,11 @@ const i18n = {
         empresa_info_horario: '<strong>🟢 Open 24 hours</strong>',
         empresa_info_servicio: '🚘 Transportation, limousines and taxi',
         empresa_info_tel1: '<strong>📞 Jorge: <a href="tel:+17865200651" style="color:inherit;">786-520-0651</a></strong>',
-        empresa_info_tel2: '<strong>📞 Sergio: <a href="tel:+17865089815" style="color:inherit;">786-508-9815</a></strong> (English calls)'
+        empresa_info_tel2: '<strong>📞 Sergio: <a href="tel:+17865089815" style="color:inherit;">786-508-9815</a></strong> (English calls)',
+        footer_desc: 'Luxury executive transportation in Miami and across Florida. 24/7 service.',
+        footer_nav: 'Quick links',
+        footer_contacto: 'Contact',
+        footer_copy: '© 2026 MAGAN GROUP LLC — All rights reserved.'
     }
 };
 
