@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Destinos — Magan Executive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+body { background:#000; color:#fff; }
+.navbar { position:fixed; top:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:8px 50px; background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); z-index:1000; }
+.logo img { height:55px; width:auto; }
+.menu a { color:#fff; margin-left:25px; text-decoration:none; font-size:14px; }
+.menu a:hover { color:#f5c542; }
+.btn-nav { background:linear-gradient(45deg,#f5c542,#ffd95a); color:#000 !important; padding:8px 18px; border-radius:20px; }
+.lang-selector { display:flex; align-items:center; gap:6px; margin-left:25px; font-size:14px; }
+.lang-selector button { background:none; border:none; color:#fff; font-size:14px; cursor:pointer; padding:2px 4px; }
+.lang-selector button.activo { color:#f5c542; font-weight:bold; }
+.lang-selector span { color:#888; }
+.hamburger{display:none;font-size:30px;color:#fff;cursor:pointer}
+.hero { padding:170px 60px 70px; text-align:center; background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)), url("/imagenes/limo1.jpg") center/cover no-repeat; }
+.hero h1 { font-size:46px; letter-spacing:.5px; }
+.hero h1 span { color:#f5c542; }
+.hero p { color:#ddd; font-size:18px; margin-top:14px; }
+.wrap { max-width:1150px; margin:0 auto; padding:56px 20px 20px; }
+.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.dcard { background:#0d0d0d; border:1px solid #262626; border-top:3px solid #f5c542; border-radius:15px; padding:26px; box-shadow:0 10px 26px rgba(0,0,0,.4); }
+.dcard h3 { color:#f5c542; font-size:20px; margin-bottom:9px; }
+.dcard p { color:#bbb; font-size:14.5px; line-height:1.55; min-height:66px; }
+.dcard a { color:#f5c542; text-decoration:none; font-weight:bold; font-size:14.5px; }
+.dcard a:hover { text-decoration:underline; }
+.nota { text-align:center; padding:44px 20px 70px; }
+.nota p { color:#eee; font-size:18px; }
+.nota .gold { color:#f5c542; font-weight:bold; }
+.boton { margin-top:22px; display:inline-block; background:linear-gradient(45deg,#f5c542,#ffd95a); color:#000; padding:13px 28px; border-radius:30px; text-decoration:none; font-weight:bold; }
+.footer { background:#050505; border-top:1px solid #222; padding:46px 60px 28px; color:#bbb; }
+.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:34px; max-width:1100px; margin:0 auto; }
+.footer h4 { color:#f5c542; margin-bottom:12px; font-size:16px; }
+.footer a { color:#bbb; text-decoration:none; display:block; margin:6px 0; font-size:14px; }
+.footer a:hover { color:#f5c542; }
+.footer p { font-size:14px; line-height:1.6; }
+.copy { text-align:center; color:#777; font-size:13px; margin-top:30px; }
+@media (max-width:768px){
+  .navbar{ padding:10px 20px; }
+  .hamburger{display:block}
+  .menu{display:none;position:absolute;top:70px;left:0;width:100%;background:#000;padding:15px 0}
+  .menu.activo{display:flex;flex-direction:column}
+  .menu a{margin:10px 20px}
+  .hero{ padding:130px 20px 50px; } .hero h1{ font-size:32px; }
+  .grid{ grid-template-columns:1fr; }
+  .footer{ padding:40px 20px 24px; } .footer-grid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+    <a class='logo' href='/'><img src="/imagenes/logomagan.png" alt="MAGAN"></a>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <nav class="menu">
+        <a href='/' data-i18n="nav_inicio">Inicio</a>
+        <a href='/vehiculos' data-i18n="nav_vehiculos">Vehículos</a>
+        <a href='/destinos' data-i18n="nav_destinos">Destinos</a>
+        <a href='/experiencia' data-i18n="nav_experiencia">Experiencia</a>
+        <a class='btn-nav' href='/cotizar' data-i18n="nav_cotizar">Cotizar</a>
+    </nav>
+    <div class="lang-selector">
+        <button type="button" id="btn-es" onclick="setLang('es')">ES</button><span>|</span>
+        <button type="button" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+</header>
+
+<section class="hero">
+    <h1 data-i18n="titulo">Destinos en <span>Florida</span></h1>
+    <p data-i18n="subtitulo">Aeropuertos, puertos, hoteles y eventos — lo llevamos a cualquier parte del estado.</p>
+</section>
+
+<div class="wrap">
+  <div class="grid">
+    <div class="dcard"><h3>✈️ MIA — Miami Intl.</h3><p data-i18n="d1">Recogidas y llegadas con monitoreo de vuelo y encuentro en la cinta de equipaje.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>✈️ FLL — Fort Lauderdale</h3><p data-i18n="d2">Servicio puntual desde y hacia el aeropuerto de Fort Lauderdale-Hollywood.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>✈️ PBI — Palm Beach Intl.</h3><p data-i18n="d3">Traslados ejecutivos a West Palm Beach y toda la zona de Palm Beach.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🚢 PortMiami & Port Everglades</h3><p data-i18n="d4">Llegue a su crucero sin estrés: recogida en hotel o aeropuerto y regreso al desembarcar.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🏖️ Miami Beach & South Beach</h3><p data-i18n="d5">Hoteles, restaurantes y la vida de Ocean Drive, con chofer que lo espera.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🏙️ Brickell & Downtown</h3><p data-i18n="d6">El corazón financiero de Miami: oficinas, hoteles y el Kaseya Center.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🌴 Coral Gables & Coconut Grove</h3><p data-i18n="d7">Elegancia clásica: Biltmore, Miracle Mile y cenas en el Grove.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🛍️ Aventura & Bal Harbour</h3><p data-i18n="d8">Compras de lujo en Aventura Mall y Bal Harbour Shops, sin preocuparse por el parqueo.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🏢 Doral & Zona del Aeropuerto</h3><p data-i18n="d9">Hoteles, oficinas y centros de convenciones junto al MIA.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>⛵ Key Biscayne</h3><p data-i18n="d10">Hoteles y eventos frente al mar, cruzando el puente Rickenbacker.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🌊 Fort Lauderdale & Hollywood</h3><p data-i18n="d11">Playas, el Hard Rock y el puerto: cobertura completa en Broward.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🏡 Weston & Suroeste de Broward</h3><p data-i18n="d12">Traslados residenciales y corporativos en Weston, Miramar y Pembroke Pines.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🌅 Boca Raton & Delray Beach</h3><p data-i18n="d13">Eventos, clubes y cenas en la costa dorada de Palm Beach County.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🐎 West Palm Beach & Wellington</h3><p data-i18n="d14">Polo, eventos ecuestres y hoteles de lujo en Palm Beach y Wellington.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🏰 Orlando & los Parques</h3><p data-i18n="d15">Viajes largos con comodidad total: Disney, Universal y centros de convenciones.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+    <div class="dcard"><h3>🔑 Los Cayos & Key West</h3><p data-i18n="d16">Key Largo, Islamorada y Key West por la escénica Overseas Highway.</p><a href='/cotizar' data-i18n="cotizar">Cotizar →</a></div>
+  </div>
+</div>
+
+<div class="nota">
+    <p data-i18n="nota">¿No ve su destino? <span class="gold">Lo llevamos a cualquier parte de Florida</span> — pregúntenos.</p>
+    <a class='boton' href='/cotizar' data-i18n="cotizar_btn">Solicitar cotización</a>
+</div>
+
+<footer class="footer">
+    <div class="footer-grid">
+        <div>
+            <h4>MAGAN EXECUTIVE</h4>
+            <p data-i18n="footer_desc">Transporte ejecutivo de lujo en Miami y todo Florida. Servicio 24/7.</p>
+        </div>
+        <div>
+            <h4 data-i18n="footer_nav">Enlaces</h4>
+            <a href='/' data-i18n="nav_inicio">Inicio</a>
+            <a href='/vehiculos' data-i18n="nav_vehiculos">Vehículos</a>
+            <a href='/destinos' data-i18n="nav_destinos">Destinos</a>
+            <a href='/experiencia' data-i18n="nav_experiencia">Experiencia</a>
+            <a href='/cotizar' data-i18n="nav_cotizar">Cotizar</a>
+        </div>
+        <div>
+            <h4 data-i18n="footer_contacto">Contacto</h4>
+            <a href="tel:+17865200651">📞 Jorge: 786-520-0651</a>
+            <a href="tel:+17865089815">📞 Sergio: 786-508-9815</a>
+            <a href="mailto:magangroupllc@gmail.com">📧 magangroupllc@gmail.com</a>
+        </div>
+    </div>
+    <div class="copy" data-i18n="footer_copy">© 2026 MAGAN GROUP LLC — Todos los derechos reservados.</div>
+</footer>
+
+<script>
+function toggleMenu(){ document.querySelector('.menu').classList.toggle('activo'); }
+const i18n = {
+  es: { nav_inicio:'Inicio', nav_vehiculos:'Vehículos', nav_destinos:'Destinos', nav_experiencia:'Experiencia', nav_cotizar:'Cotizar',
+    titulo:'Destinos en <span>Florida</span>', subtitulo:'Aeropuertos, puertos, hoteles y eventos — lo llevamos a cualquier parte del estado.',
+    d1:'Recogidas y llegadas con monitoreo de vuelo y encuentro en la cinta de equipaje.',
+    d2:'Servicio puntual desde y hacia el aeropuerto de Fort Lauderdale-Hollywood.',
+    d3:'Traslados ejecutivos a West Palm Beach y toda la zona de Palm Beach.',
+    d4:'Llegue a su crucero sin estrés: recogida en hotel o aeropuerto y regreso al desembarcar.',
+    d5:'Hoteles, restaurantes y la vida de Ocean Drive, con chofer que lo espera.',
+    d6:'El corazón financiero de Miami: oficinas, hoteles y el Kaseya Center.',
+    d7:'Elegancia clásica: Biltmore, Miracle Mile y cenas en el Grove.',
+    d8:'Compras de lujo en Aventura Mall y Bal Harbour Shops, sin preocuparse por el parqueo.',
+    d9:'Hoteles, oficinas y centros de convenciones junto al MIA.',
+    d10:'Hoteles y eventos frente al mar, cruzando el puente Rickenbacker.',
+    d11:'Playas, el Hard Rock y el puerto: cobertura completa en Broward.',
+    d12:'Traslados residenciales y corporativos en Weston, Miramar y Pembroke Pines.',
+    d13:'Eventos, clubes y cenas en la costa dorada de Palm Beach County.',
+    d14:'Polo, eventos ecuestres y hoteles de lujo en Palm Beach y Wellington.',
+    d15:'Viajes largos con comodidad total: Disney, Universal y centros de convenciones.',
+    d16:'Key Largo, Islamorada y Key West por la escénica Overseas Highway.',
+    cotizar:'Cotizar →', cotizar_btn:'Solicitar cotización',
+    nota:'¿No ve su destino? <span class="gold">Lo llevamos a cualquier parte de Florida</span> — pregúntenos.',
+    footer_desc:'Transporte ejecutivo de lujo en Miami y todo Florida. Servicio 24/7.', footer_nav:'Enlaces', footer_contacto:'Contacto', footer_copy:'© 2026 MAGAN GROUP LLC — Todos los derechos reservados.' },
+  en: { nav_inicio:'Home', nav_vehiculos:'Vehicles', nav_destinos:'Destinations', nav_experiencia:'Experience', nav_cotizar:'Get a Quote',
+    titulo:'Destinations in <span>Florida</span>', subtitulo:'Airports, seaports, hotels and events — we will take you anywhere in the state.',
+    d1:'Pickups and drop-offs with flight monitoring and meet-and-greet at baggage claim.',
+    d2:'Punctual service to and from Fort Lauderdale-Hollywood International Airport.',
+    d3:'Executive transfers to West Palm Beach and the whole Palm Beach area.',
+    d4:'Reach your cruise stress-free: hotel or airport pickup and a ride back when you disembark.',
+    d5:'Hotels, dining and Ocean Drive life, with a chauffeur who waits for you.',
+    d6:'Miami\u2019s financial heart: offices, hotels and the Kaseya Center.',
+    d7:'Classic elegance: the Biltmore, Miracle Mile and dinners in the Grove.',
+    d8:'Luxury shopping at Aventura Mall and Bal Harbour Shops, with no parking worries.',
+    d9:'Hotels, offices and convention centers next to MIA.',
+    d10:'Oceanfront hotels and events across the Rickenbacker Causeway.',
+    d11:'Beaches, the Hard Rock and the seaport: full Broward coverage.',
+    d12:'Residential and corporate transfers in Weston, Miramar and Pembroke Pines.',
+    d13:'Events, clubs and dining on Palm Beach County\u2019s gold coast.',
+    d14:'Polo, equestrian events and luxury hotels in Palm Beach and Wellington.',
+    d15:'Long trips in total comfort: Disney, Universal and convention centers.',
+    d16:'Key Largo, Islamorada and Key West along the scenic Overseas Highway.',
+    cotizar:'Get a quote →', cotizar_btn:'Request a quote',
+    nota:'Don\u2019t see your destination? <span class="gold">We will take you anywhere in Florida</span> — just ask.',
+    footer_desc:'Luxury executive transportation in Miami and across Florida. 24/7 service.', footer_nav:'Quick links', footer_contacto:'Contact', footer_copy:'© 2026 MAGAN GROUP LLC — All rights reserved.' }
+};
+function setLang(lang){
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    const k = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][k]) el.innerHTML = i18n[lang][k];
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('btn-es').classList.toggle('activo', lang==='es');
+  document.getElementById('btn-en').classList.toggle('activo', lang==='en');
+  try { localStorage.setItem('magan-lang', lang); } catch(e){}
+}
+(function(){ let s='es'; try { s = localStorage.getItem('magan-lang') || 'es'; } catch(e){} setLang(s==='en' ? 'en' : 'es'); })();
+</script>
+</body>
+</html>
