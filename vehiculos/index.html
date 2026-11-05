@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Vehículos — Magan Executive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+body { background:#000; color:#fff; }
+.navbar { position:fixed; top:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:8px 50px; background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); z-index:1000; }
+.logo img { height:55px; width:auto; }
+.menu a { color:#fff; margin-left:25px; text-decoration:none; font-size:14px; }
+.menu a:hover { color:#f5c542; }
+.btn-nav { background:linear-gradient(45deg,#f5c542,#ffd95a); color:#000 !important; padding:8px 18px; border-radius:20px; }
+.lang-selector { display:flex; align-items:center; gap:6px; margin-left:25px; font-size:14px; }
+.lang-selector button { background:none; border:none; color:#fff; font-size:14px; cursor:pointer; padding:2px 4px; }
+.lang-selector button.activo { color:#f5c542; font-weight:bold; }
+.lang-selector span { color:#888; }
+.hamburger{display:none;font-size:30px;color:#fff;cursor:pointer}
+.hero { padding:170px 60px 70px; text-align:center; background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)), url("/imagenes/limo2.jpg") center/cover no-repeat; }
+.hero h1 { font-size:46px; letter-spacing:.5px; }
+.hero h1 span { color:#f5c542; }
+.hero p { color:#ddd; font-size:18px; margin-top:14px; }
+.wrap { max-width:1150px; margin:0 auto; padding:60px 20px 10px; }
+.card { display:flex; gap:36px; background:#0d0d0d; border:1px solid #262626; border-top:3px solid #f5c542; border-radius:18px; padding:28px; margin-bottom:34px; box-shadow:0 12px 32px rgba(0,0,0,.45); }
+.card .foto { width:46%; }
+.card .foto img { width:100%; height:100%; min-height:240px; object-fit:cover; border-radius:14px; }
+.card .info { flex:1; text-align:left; }
+.card h3 { font-size:27px; color:#f5c542; margin-bottom:6px; }
+.card .clase { color:#999; font-size:14px; letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+.card p { color:#ccc; font-size:16px; line-height:1.55; }
+.specs { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0; }
+.spec { border:1px solid #3a3a3a; border-radius:999px; padding:7px 14px; font-size:14px; color:#eee; }
+.spec b { color:#f5c542; }
+.boton { display:inline-block; background:linear-gradient(45deg,#f5c542,#ffd95a); color:#000; padding:12px 26px; border-radius:30px; text-decoration:none; font-weight:bold; }
+.panel { width:46%; min-height:240px; border-radius:14px; background:radial-gradient(120% 140% at 20% 0%, #1c1c1c, #050505); border:1px solid #2c2c2c; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; }
+.panel .marca { font-size:30px; letter-spacing:4px; color:#f5c542; }
+.panel .modelo { font-size:15px; letter-spacing:3px; color:#bbb; margin-top:8px; }
+.features { max-width:1150px; margin:6px auto 0; padding:10px 20px 70px; text-align:center; }
+.features h2 { font-size:32px; margin-bottom:26px; }
+.features h2 span { color:#f5c542; }
+.feat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.feat { background:#111; border:1px solid #262626; border-radius:15px; padding:24px; }
+.feat h4 { color:#f5c542; font-size:17px; margin-bottom:8px; }
+.feat p { color:#bbb; font-size:14px; line-height:1.5; }
+.footer { background:#050505; border-top:1px solid #222; padding:46px 60px 28px; color:#bbb; }
+.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:34px; max-width:1100px; margin:0 auto; }
+.footer h4 { color:#f5c542; margin-bottom:12px; font-size:16px; }
+.footer a { color:#bbb; text-decoration:none; display:block; margin:6px 0; font-size:14px; }
+.footer a:hover { color:#f5c542; }
+.footer p { font-size:14px; line-height:1.6; }
+.copy { text-align:center; color:#777; font-size:13px; margin-top:30px; }
+@media (max-width:768px){
+  .navbar{ padding:10px 20px; }
+  .hamburger{display:block}
+  .menu{display:none;position:absolute;top:70px;left:0;width:100%;background:#000;padding:15px 0}
+  .menu.activo{display:flex;flex-direction:column}
+  .menu a{margin:10px 20px}
+  .hero{ padding:130px 20px 50px; } .hero h1{ font-size:32px; }
+  .card{ flex-direction:column; } .card .foto,.panel{ width:100%; }
+  .feat-grid{ grid-template-columns:1fr; }
+  .footer{ padding:40px 20px 24px; } .footer-grid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+    <a class='logo' href='/'><img src="/imagenes/logomagan.png" alt="MAGAN"></a>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <nav class="menu">
+        <a href='/' data-i18n="nav_inicio">Inicio</a>
+        <a href='/vehiculos' data-i18n="nav_vehiculos">Vehículos</a>
+        <a href='/destinos' data-i18n="nav_destinos">Destinos</a>
+        <a href='/experiencia' data-i18n="nav_experiencia">Experiencia</a>
+        <a class='btn-nav' href='/cotizar' data-i18n="nav_cotizar">Cotizar</a>
+    </nav>
+    <div class="lang-selector">
+        <button type="button" id="btn-es" onclick="setLang('es')">ES</button><span>|</span>
+        <button type="button" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+</header>
+
+<section class="hero">
+    <h1 data-i18n="titulo">Nuestra <span>Flota</span></h1>
+    <p data-i18n="subtitulo">Vehículos modernos, impecables y listos las 24 horas — el lujo se siente en cada trayecto.</p>
+</section>
+
+<div class="wrap">
+
+    <div class="card">
+        <div class="foto"><img src="/imagenes/limo2.jpg" alt="Chevrolet Suburban 2026"></div>
+        <div class="info">
+            <h3>Chevrolet Suburban 2026</h3>
+            <div class="clase" data-i18n="v1_clase">SUV Premium · Insignia de la casa</div>
+            <p data-i18n="v1_texto">Nuestra unidad más nueva: máximo espacio, confort y presencia. Ideal para ejecutivos, familias y grupos que viajan con equipaje y quieren llegar como VIP.</p>
+            <div class="specs">
+                <span class="spec">👥 <b data-i18n="v1_pax">Hasta 7 pasajeros</b></span>
+                <span class="spec">🧳 <b data-i18n="v1_mal">Equipaje amplio</b></span>
+                <span class="spec">📶 <b>Wi-Fi</b></span>
+                <span class="spec">📱 <b>Tablets</b></span>
+            </div>
+            <a class='boton' href='/cotizar' data-i18n="cotizar">Solicitar cotización</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="foto"><img src="/imagenes/limo1.jpg" alt="Chevrolet Suburban"></div>
+        <div class="info">
+            <h3>Chevrolet Suburban</h3>
+            <div class="clase" data-i18n="v2_clase">SUV Premium · Aeropuertos y aviación privada</div>
+            <p data-i18n="v2_texto">La SUV de referencia para traslados de aeropuerto y aviación privada (FBO): recibimos a su pasajero al bajar del avión, con espacio de sobra para todo el equipaje.</p>
+            <div class="specs">
+                <span class="spec">👥 <b data-i18n="v2_pax">Hasta 7 pasajeros</b></span>
+                <span class="spec">🧳 <b data-i18n="v2_mal">Equipaje amplio</b></span>
+                <span class="spec">✈️ <b data-i18n="v2_fbo">Servicio FBO</b></span>
+                <span class="spec">🕒 <b>24/7</b></span>
+            </div>
+            <a class='boton' href='/cotizar' data-i18n="cotizar">Solicitar cotización</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="panel"><div class="marca">LINCOLN</div><div class="modelo">AVIATOR</div></div>
+        <div class="info">
+            <h3>Lincoln Aviator</h3>
+            <div class="clase" data-i18n="v3_clase">SUV de Lujo · Ejecutiva</div>
+            <p data-i18n="v3_texto">Elegancia serena y un andar suave: la opción perfecta para ejecutivos y parejas que buscan máxima comodidad y un perfil discreto.</p>
+            <div class="specs">
+                <span class="spec">👥 <b data-i18n="v3_pax">Hasta 6 pasajeros</b></span>
+                <span class="spec">🧳 <b data-i18n="v3_mal">Equipaje cómodo</b></span>
+                <span class="spec">🔒 <b data-i18n="v3_priv">Máxima privacidad</b></span>
+                <span class="spec">🕒 <b>24/7</b></span>
+            </div>
+            <a class='boton' href='/cotizar' data-i18n="cotizar">Solicitar cotización</a>
+        </div>
+    </div>
+
+</div>
+
+<section class="features">
+    <h2 data-i18n="feat_titulo">En cada viaje, <span>siempre</span></h2>
+    <div class="feat-grid">
+        <div class="feat"><h4 data-i18n="f1_t">🧼 Impecables</h4><p data-i18n="f1_d">Vehículos limpios y revisados antes de cada servicio.</p></div>
+        <div class="feat"><h4 data-i18n="f2_t">🎩 Chofer profesional</h4><p data-i18n="f2_d">Conductores con experiencia, presentación y trato VIP.</p></div>
+        <div class="feat"><h4 data-i18n="f3_t">🕒 24/7 real</h4><p data-i18n="f3_d">Disponibles a toda hora, todos los días, en todo Florida.</p></div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-grid">
+        <div>
+            <h4>MAGAN EXECUTIVE</h4>
+            <p data-i18n="footer_desc">Transporte ejecutivo de lujo en Miami y todo Florida. Servicio 24/7.</p>
+        </div>
+        <div>
+            <h4 data-i18n="footer_nav">Enlaces</h4>
+            <a href='/' data-i18n="nav_inicio">Inicio</a>
+            <a href='/vehiculos' data-i18n="nav_vehiculos">Vehículos</a>
+            <a href='/destinos' data-i18n="nav_destinos">Destinos</a>
+            <a href='/experiencia' data-i18n="nav_experiencia">Experiencia</a>
+            <a href='/cotizar' data-i18n="nav_cotizar">Cotizar</a>
+        </div>
+        <div>
+            <h4 data-i18n="footer_contacto">Contacto</h4>
+            <a href="tel:+17865200651">📞 Jorge: 786-520-0651</a>
+            <a href="tel:+17865089815">📞 Sergio: 786-508-9815</a>
+            <a href="mailto:magangroupllc@gmail.com">📧 magangroupllc@gmail.com</a>
+        </div>
+    </div>
+    <div class="copy" data-i18n="footer_copy">© 2026 MAGAN GROUP LLC — Todos los derechos reservados.</div>
+</footer>
+
+<script>
+function toggleMenu(){ document.querySelector('.menu').classList.toggle('activo'); }
+const i18n = {
+  es: { nav_inicio:'Inicio', nav_vehiculos:'Vehículos', nav_destinos:'Destinos', nav_experiencia:'Experiencia', nav_cotizar:'Cotizar',
+    titulo:'Nuestra <span>Flota</span>', subtitulo:'Vehículos modernos, impecables y listos las 24 horas — el lujo se siente en cada trayecto.',
+    v1_clase:'SUV Premium · Insignia de la casa', v1_texto:'Nuestra unidad más nueva: máximo espacio, confort y presencia. Ideal para ejecutivos, familias y grupos que viajan con equipaje y quieren llegar como VIP.', v1_pax:'Hasta 7 pasajeros', v1_mal:'Equipaje amplio',
+    v2_clase:'SUV Premium · Aeropuertos y aviación privada', v2_texto:'La SUV de referencia para traslados de aeropuerto y aviación privada (FBO): recibimos a su pasajero al bajar del avión, con espacio de sobra para todo el equipaje.', v2_pax:'Hasta 7 pasajeros', v2_mal:'Equipaje amplio', v2_fbo:'Servicio FBO',
+    v3_clase:'SUV de Lujo · Ejecutiva', v3_texto:'Elegancia serena y un andar suave: la opción perfecta para ejecutivos y parejas que buscan máxima comodidad y un perfil discreto.', v3_pax:'Hasta 6 pasajeros', v3_mal:'Equipaje cómodo', v3_priv:'Máxima privacidad',
+    cotizar:'Solicitar cotización', feat_titulo:'En cada viaje, <span>siempre</span>',
+    f1_t:'🧼 Impecables', f1_d:'Vehículos limpios y revisados antes de cada servicio.',
+    f2_t:'🎩 Chofer profesional', f2_d:'Conductores con experiencia, presentación y trato VIP.',
+    f3_t:'🕒 24/7 real', f3_d:'Disponibles a toda hora, todos los días, en todo Florida.',
+    footer_desc:'Transporte ejecutivo de lujo en Miami y todo Florida. Servicio 24/7.', footer_nav:'Enlaces', footer_contacto:'Contacto', footer_copy:'© 2026 MAGAN GROUP LLC — Todos los derechos reservados.' },
+  en: { nav_inicio:'Home', nav_vehiculos:'Vehicles', nav_destinos:'Destinations', nav_experiencia:'Experience', nav_cotizar:'Get a Quote',
+    titulo:'Our <span>Fleet</span>', subtitulo:'Modern, impeccable vehicles ready around the clock — luxury you can feel on every ride.',
+    v1_clase:'Premium SUV · Our flagship', v1_texto:'Our newest unit: maximum space, comfort and presence. Ideal for executives, families and groups traveling with luggage who want to arrive like VIPs.', v1_pax:'Up to 7 passengers', v1_mal:'Ample luggage space',
+    v2_clase:'Premium SUV · Airports & private aviation', v2_texto:'The go-to SUV for airport and private aviation (FBO) transfers: we meet your passenger right off the plane, with room to spare for all the luggage.', v2_pax:'Up to 7 passengers', v2_mal:'Ample luggage space', v2_fbo:'FBO service',
+    v3_clase:'Luxury SUV · Executive', v3_texto:'Serene elegance and a smooth ride: the perfect choice for executives and couples seeking maximum comfort and a discreet profile.', v3_pax:'Up to 6 passengers', v3_mal:'Comfortable luggage space', v3_priv:'Maximum privacy',
+    cotizar:'Request a quote', feat_titulo:'On every ride, <span>always</span>',
+    f1_t:'🧼 Impeccable', f1_d:'Vehicles cleaned and checked before every service.',
+    f2_t:'🎩 Professional chauffeur', f2_d:'Experienced drivers with presentation and VIP treatment.',
+    f3_t:'🕒 Real 24/7', f3_d:'Available at any hour, every day, across Florida.',
+    footer_desc:'Luxury executive transportation in Miami and across Florida. 24/7 service.', footer_nav:'Quick links', footer_contacto:'Contact', footer_copy:'© 2026 MAGAN GROUP LLC — All rights reserved.' }
+};
+function setLang(lang){
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    const k = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][k]) el.innerHTML = i18n[lang][k];
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('btn-es').classList.toggle('activo', lang==='es');
+  document.getElementById('btn-en').classList.toggle('activo', lang==='en');
+  try { localStorage.setItem('magan-lang', lang); } catch(e){}
+}
+(function(){ let s='es'; try { s = localStorage.getItem('magan-lang') || 'es'; } catch(e){} setLang(s==='en' ? 'en' : 'es'); })();
+</script>
+</body>
+</html>
